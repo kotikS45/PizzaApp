@@ -1,6 +1,7 @@
 package com.pizzaapp.api;
 
 import com.pizzaapp.config.Config;
+import com.squareup.picasso.MemoryPolicy;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -33,9 +33,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                 if (id == R.id.page_1) {
                     intent = new Intent(BaseActivity.this, CategoriesActivity.class);
                 } else if (id == R.id.page_2) {
-
+                    intent = new Intent(BaseActivity.this, CategoriesActivity.class);
                 } else if (id == R.id.page_3) {
-
+                    intent = new Intent(BaseActivity.this, CategoriesActivity.class);
                 } else {
                     return false;
                 }
