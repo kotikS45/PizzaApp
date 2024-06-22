@@ -6,4 +6,15 @@
     <string name="login">Login</string>
     <string name="registration">Registration</string>
     <string name="register">Register</string>
+    <string name="login_image">Login image</string>
+    <string name="icon_email">icon_email</string>
+    <string name="email">Email</string>
+    <string name="icon_password">Icon password</string>
+    <string name="password">Password</string>
+    <string name="new_to_here">New to here?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="register_image">Register image</string>
+    <string name="icon_username">Icon username</string>
+    <string name="username">Username</string>
+    <string name="back_button">Back button</string>
 </resources>
