@@ -14,7 +14,7 @@
         android:id="@+id/back_btn"
         android:contentDescription="@string/back_button"
         android:src="@drawable/ic_round_arrow_back"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="18dp"

@@ -17,4 +17,15 @@
     <string name="icon_username">Icon username</string>
     <string name="username">Username</string>
     <string name="back_button">Back button</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="me">Me</string>
+    <string name="logout_button">Logout button</string>
+    <string name="update_profile_button">Update profile button</string>
+    <string name="my_account_option">my account option</string>
+    <string name="my_account">My Account</string>
+    <string name="make_changes_to_your_account">Make changes to your account</string>
+    <string name="arrow_button">Arrow button</string>
+    <string name="Logout">Log out</string>
+    <string name="further_secure_your_account_for_safety">Further secure your account for safety</string>
 </resources>

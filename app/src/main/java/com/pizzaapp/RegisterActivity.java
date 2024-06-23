@@ -6,18 +6,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.pizzaapp.databinding.ActivityRegisterBinding;
@@ -55,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
                         HashMap<String, String> userInfo = new HashMap<>();
                         userInfo.put("email", binding.emailEt.getText().toString());
                         userInfo.put("username", binding.usernameEt.getText().toString());
+                        userInfo.put("image", "");
                         FirebaseDatabase.getInstance()
                                 .getReference()
                                 .child("Users")

@@ -1,7 +1,10 @@
 [versions]
 agp = "8.4.1"
+circleimageview = "3.1.0"
+circleimageviewVersion = "3.1.0"
 converterGson = "2.11.0"
 firebaseBom = "33.1.1"
+firebaseStorage = "21.0.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
@@ -16,9 +19,12 @@ picasso = "2.71828"
 retrofit = "2.11.0"
 
 [libraries]
+circleimageview = { module = "de.hdodennof:circleimageview", version.ref = "circleimageview" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-storage = { module = "com.google.firebase:firebase-storage", version.ref = "firebaseStorage" }
+hdodenhof-circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageviewVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

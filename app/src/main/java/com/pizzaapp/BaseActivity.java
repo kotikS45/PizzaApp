@@ -4,12 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -30,11 +26,11 @@ public abstract class BaseActivity extends AppCompatActivity {
                 Intent intent = null;
 
                 int id = item.getItemId();
-                if (id == R.id.page_1) {
+                if (id == R.id.categories) {
                     intent = new Intent(BaseActivity.this, CategoriesActivity.class);
-                } else if (id == R.id.page_2) {
-                    intent = new Intent(BaseActivity.this, CategoriesActivity.class);
-                } else if (id == R.id.page_3) {
+                } else if (id == R.id.home) {
+                    intent = new Intent(BaseActivity.this, MainActivity.class);
+                } else if (id == R.id.profile) {
                     intent = new Intent(BaseActivity.this, CategoriesActivity.class);
                 } else {
                     return false;

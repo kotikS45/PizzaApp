@@ -37,22 +37,29 @@ android {
 }
 
 dependencies {
-    implementation (platform(libs.firebase.bom))
-    implementation (libs.firebase.analytics)
+    implementation(platform(libs.firebase.bom))
 
-    implementation (libs.material)
-
-    implementation (libs.retrofit2.retrofit)
-    implementation (libs.converter.gson)
-
-    implementation (libs.picasso)
+    implementation(libs.activity)
 
     implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.activity)
+
     implementation(libs.constraintlayout)
+
+    implementation(libs.converter.gson)
+
+    implementation(libs.hdodenhof.circleimageview)
+
+    implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.storage)
+
+    implementation(libs.material)
+
+    implementation(libs.retrofit2.retrofit)
+
+    implementation(libs.picasso)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
