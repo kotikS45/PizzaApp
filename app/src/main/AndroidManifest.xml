@@ -21,12 +21,6 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".CategoriesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".BaseActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

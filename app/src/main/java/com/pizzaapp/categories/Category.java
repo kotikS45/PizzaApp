@@ -1,15 +1,18 @@
-package com.pizzaapp.dto;
+package com.pizzaapp.categories;
 
-public class CategoryDTO {
-
+public class Category {
     private int id;
     private String name;
     private String image;
 
-    public CategoryDTO() {
+    public Category() {}
+
+    public Category(String name, String image) {
+        this.name = name;
+        this.image = image;
     }
 
-    public CategoryDTO(int id, String name, String image) {
+    public Category(int id, String name, String image) {
         this.id = id;
         this.name = name;
         this.image = image;

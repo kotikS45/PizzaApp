@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/cntrBtns"
+            android:id="@+id/layout_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/ivCategoryImage"
+                android:id="@+id/image_iv"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:contentDescription="@string/category"
@@ -33,7 +33,7 @@
                 android:minHeight="250dp" />
 
             <TextView
-                android:id="@+id/categoryName"
+                android:id="@+id/name_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
