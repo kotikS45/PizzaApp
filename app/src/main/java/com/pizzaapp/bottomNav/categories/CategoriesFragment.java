@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.firebase.database.DataSnapshot;
@@ -49,12 +50,8 @@ public class CategoriesFragment extends Fragment {
                     categories.add(new Category(name, image));
                 }
 
-                Context context = getContext();
-                if (context != null) {
-                    binding.rcCategories.setLayoutManager(new LinearLayoutManager(context));
-                    binding.rcCategories.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
-                    binding.rcCategories.setAdapter(new CategoriesAdapter(categories));
-                }
+                binding.rcCategories.setLayoutManager(new GridLayoutManager(getContext(), 2));
+                binding.rcCategories.setAdapter(new CategoriesAdapter(categories));
             }
 
             @Override
