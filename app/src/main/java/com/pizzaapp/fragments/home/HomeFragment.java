@@ -1,4 +1,4 @@
-package com.pizzaapp.bottomNav.home;
+package com.pizzaapp.fragments.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

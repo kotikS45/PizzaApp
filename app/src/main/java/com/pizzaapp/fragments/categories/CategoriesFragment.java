@@ -1,6 +1,5 @@
-package com.pizzaapp.bottomNav.categories;
+package com.pizzaapp.fragments.categories;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,23 +8,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pizzaapp.R;
 import com.pizzaapp.categories.CategoriesAdapter;
 import com.pizzaapp.databinding.FragmentCategoriesBinding;
 import com.pizzaapp.categories.Category;
+import com.pizzaapp.fragments.products.ProductsFragment;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class CategoriesFragment extends Fragment {
-    FragmentCategoriesBinding binding;
+public class CategoriesFragment extends Fragment implements CategoriesAdapter.OnCategoryClickListener {
+    private FragmentCategoriesBinding binding;
 
     @Nullable
     @Override
@@ -44,14 +43,15 @@ public class CategoriesFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
+                    String id = categorySnapshot.getKey();
                     String name = Objects.requireNonNull(categorySnapshot.child("name").getValue()).toString();
                     String image = Objects.requireNonNull(categorySnapshot.child("image").getValue()).toString();
 
-                    categories.add(new Category(name, image));
+                    categories.add(new Category(id, name, image));
                 }
 
                 binding.rcCategories.setLayoutManager(new GridLayoutManager(getContext(), 2));
-                binding.rcCategories.setAdapter(new CategoriesAdapter(categories));
+                binding.rcCategories.setAdapter(new CategoriesAdapter(categories, CategoriesFragment.this));
             }
 
             @Override
@@ -59,5 +59,21 @@ public class CategoriesFragment extends Fragment {
 
             }
         });
+
+    }
+
+    @Override
+    public void onCategoryClick(String categoryId) {
+        Bundle bundle = new Bundle();
+        bundle.putString("categoryId", categoryId);
+
+        Fragment productsFragment = new ProductsFragment();
+        productsFragment.setArguments(bundle);
+
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, productsFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

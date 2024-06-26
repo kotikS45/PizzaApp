@@ -6,22 +6,36 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.categories.CategoriesFragment">
+    tools:context=".fragments.products.ProductsFragment">
+
+    <ImageView
+        android:id="@+id/image_iv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:contentDescription="@string/category"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="@id/textView"
+        app:layout_constraintBottom_toBottomOf="@id/textView"/>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/categories"
+        android:text="@string/product"
         android:textSize="34sp"
         android:fontFamily="@font/cabin_bold"
-        android:textColor="@color/purple"
+        android:textColor="@color/white"
         android:layout_margin="21dp"
+        android:shadowColor="@color/blackShadow"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcCategories"
+        android:id="@+id/rcProducts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"

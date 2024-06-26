@@ -1,4 +1,4 @@
-package com.pizzaapp.bottomNav.profile;
+package com.pizzaapp.fragments.profile;
 
 import android.app.Activity;
 import android.content.Intent;

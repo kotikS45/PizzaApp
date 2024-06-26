@@ -29,4 +29,6 @@
     <string name="Logout">Log out</string>
     <string name="further_secure_your_account_for_safety">Further secure your account for safety</string>
     <string name="_0">(0)</string>
+    <string name="product">Product</string>
+    <string name="price">Price</string>
 </resources>

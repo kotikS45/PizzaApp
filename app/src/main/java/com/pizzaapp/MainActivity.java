@@ -12,9 +12,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.pizzaapp.bottomNav.categories.CategoriesFragment;
-import com.pizzaapp.bottomNav.home.HomeFragment;
-import com.pizzaapp.bottomNav.profile.ProfileFragment;
+import com.pizzaapp.fragments.categories.CategoriesFragment;
+import com.pizzaapp.fragments.home.HomeFragment;
+import com.pizzaapp.fragments.profile.ProfileFragment;
 import com.pizzaapp.databinding.ActivityMainBinding;
 
 import java.util.HashMap;
