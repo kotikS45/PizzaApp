@@ -1,5 +1,7 @@
 package com.pizzaapp.products;
 
+import static com.pizzaapp.utils.Format.formatCurrency;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +13,13 @@ import com.pizzaapp.R;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductViewHolder> {
-    private List<Product> items = null;
+    private final List<ProductListItem> items;
     private final ProductsAdapter.OnProductClickListener onProductClickListener;
 
-    public ProductsAdapter(List<Product> items, ProductsAdapter.OnProductClickListener listener) {
+    public ProductsAdapter(List<ProductListItem> items, ProductsAdapter.OnProductClickListener listener) {
         this.items = items;
         this.onProductClickListener = listener;
     }
@@ -35,14 +36,14 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         if(items!=null && position<items.size()) {
-            Product product = items.get(position);
+            ProductListItem product = items.get(position);
             holder.getName_tv().setText(product.getName());
-            holder.getPrice_tv().setText(String.valueOf(formatCurrency(product.getPrice().get(0))));
+            holder.getPrice_tv().setText(formatCurrency(product.getPrice()));
 
-            if (!product.getImages().isEmpty()) {
+            if (!product.getImage().isEmpty()) {
 
                 Picasso.get()
-                        .load(product.getImages().get(0))
+                        .load(product.getImage())
                         .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                         .placeholder(R.drawable.placeholder_image)
                         .error(R.drawable.error_image)
@@ -59,17 +60,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         }
     }
 
-    public static String formatCurrency(double amount) {
-        DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        return decimalFormat.format(amount) + " грн";
-    }
-
     @Override
     public int getItemCount() {
         return items.size();
     }
 
     public interface OnProductClickListener {
-        void onProductClick(String categoryId);
+        void onProductClick(String productId);
     }
 }

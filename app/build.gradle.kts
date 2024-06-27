@@ -54,11 +54,11 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.storage)
 
-    implementation(libs.material)
-
     implementation(libs.retrofit2.retrofit)
 
     implementation(libs.picasso)
+
+    implementation(libs.material)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

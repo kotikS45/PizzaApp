@@ -21,6 +21,7 @@ import com.pizzaapp.categories.Category;
 import com.pizzaapp.fragments.products.ProductsFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class CategoriesFragment extends Fragment implements CategoriesAdapter.OnCategoryClickListener {
@@ -42,16 +43,36 @@ public class CategoriesFragment extends Fragment implements CategoriesAdapter.On
         FirebaseDatabase.getInstance().getReference().child("Categories").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HashMap<String, Category> categoryMap = new HashMap<>();
                 for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
                     String id = categorySnapshot.getKey();
                     String name = Objects.requireNonNull(categorySnapshot.child("name").getValue()).toString();
                     String image = Objects.requireNonNull(categorySnapshot.child("image").getValue()).toString();
 
-                    categories.add(new Category(id, name, image));
+                    categoryMap.put(id, new Category(id, name, image, 0));
                 }
 
-                binding.rcCategories.setLayoutManager(new GridLayoutManager(getContext(), 2));
-                binding.rcCategories.setAdapter(new CategoriesAdapter(categories, CategoriesFragment.this));
+                FirebaseDatabase.getInstance().getReference().child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                            String categoryId = Objects.requireNonNull(productSnapshot.child("categoryId").getValue()).toString();
+                            Category category = categoryMap.get(categoryId);
+                            if (category != null) {
+                                category.setProductsCount(category.getProductsCount() + 1);
+                            }
+                        }
+
+                        categories.addAll(categoryMap.values());
+
+                        binding.rcCategories.setLayoutManager(new GridLayoutManager(getContext(), 2));
+                        binding.rcCategories.setAdapter(new CategoriesAdapter(categories, CategoriesFragment.this));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
             }
 
             @Override
@@ -59,7 +80,6 @@ public class CategoriesFragment extends Fragment implements CategoriesAdapter.On
 
             }
         });
-
     }
 
     @Override

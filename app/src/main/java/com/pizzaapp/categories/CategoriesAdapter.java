@@ -8,13 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pizzaapp.R;
+import com.pizzaapp.utils.Format;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoryViewHolder> {
-    private List<Category> items = null;
+    private final List<Category> items;
     private final OnCategoryClickListener onCategoryClickListener;
 
     public CategoriesAdapter(List<Category> items, OnCategoryClickListener listener) {
@@ -35,6 +36,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryViewHolder> 
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         if(items!=null && position<items.size()) {
             holder.getName_rv().setText(items.get(position).getName());
+            holder.getCount_tv().setText(Format.formatCategoryProductsCount(items.get(position).getProductsCount()));
 
             Picasso.get()
                     .load(items.get(position).getImage())

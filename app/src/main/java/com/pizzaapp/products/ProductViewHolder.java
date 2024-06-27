@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pizzaapp.R;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder {
-    private TextView name_tv = null;
-    private ImageView image_iv = null;
-    private TextView price_tv = null;
+    private final TextView name_tv;
+    private final ImageView image_iv;
+    private final TextView price_tv;
+    private final TextView details_tv;
 
 
     public ProductViewHolder(@NonNull View itemView) {
@@ -20,6 +21,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
         name_tv = itemView.findViewById(R.id.name_tv);
         image_iv = itemView.findViewById(R.id.image_iv);
         price_tv = itemView.findViewById(R.id.price_tv);
+        details_tv = itemView.findViewById(R.id.details_tv);
     }
 
     public TextView getPrice_tv() {
@@ -32,5 +34,9 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
 
     public ImageView getImage_iv() {
         return image_iv;
+    }
+
+    public TextView getDetails_tv() {
+        return details_tv;
     }
 }

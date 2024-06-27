@@ -6,10 +6,13 @@
     <color name="white">#FFFFFFFF</color>
     <color name="whiteD7">#D7D7D7</color>
     <color name="blue">#0601B4</color>
-    <color name="grey">#F3F3F3</color>
+    <color name="white2">#F3F3F3</color>
+    <color name="gray">#AAAAAA</color>
     <color name="light_blue">#C0CCEC</color>
     <color name="whiteBackground">#F9F9F9</color>
     <color name="orange">#FCBA03</color>
     <color name="purple">#452173</color>
+    <color name="purpleLight">#5B41FF</color>
     <color name="textPurple">#2D0C57</color>
+    <color name="textDetails">#9095A6</color>
 </resources>

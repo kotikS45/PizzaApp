@@ -8,15 +8,17 @@ public class Product {
     private List<Double> price;
     private List<Double> weight;
     private List<String> images;
+    private String details;
 
     public Product() {}
 
-    public Product(String id, String name, List<Double> price, List<Double> weight, List<String> images) {
+    public Product(String id, String name, List<Double> price, List<Double> weight, List<String> images, String details) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.weight = weight;
         this.images = images;
+        this.details = details;
     }
 
     public String getId() {
@@ -57,5 +59,13 @@ public class Product {
 
     public void setImages(List<String> images) {
         this.images = images;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }

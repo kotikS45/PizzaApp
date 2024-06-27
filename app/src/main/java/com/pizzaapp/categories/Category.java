@@ -4,13 +4,16 @@ public class Category {
     private String id;
     private String name;
     private String image;
+    private int productsCount;
 
-    public Category() {}
+    public Category() {
+    }
 
-    public Category(String id, String name, String image) {
+    public Category(String id, String name, String image, int productCount) {
         this.id = id;
         this.name = name;
         this.image = image;
+        this.productsCount = productCount;
     }
 
     public String getId() {
@@ -35,5 +38,13 @@ public class Category {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getProductsCount() {
+        return productsCount;
+    }
+
+    public void setProductsCount(int productsCount) {
+        this.productsCount = productsCount;
     }
 }

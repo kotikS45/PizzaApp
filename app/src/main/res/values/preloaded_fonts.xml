@@ -5,6 +5,10 @@
         <item>@font/dm_sans</item>
         <item>@font/dm_sans_bold</item>
         <item>@font/dm_sans_medium</item>
+        <item>@font/poppins_medium</item>
+        <item>@font/raleway</item>
+        <item>@font/raleway_bold</item>
+        <item>@font/raleway_medium</item>
         <item>@font/roboto</item>
         <item>@font/roboto_bold</item>
         <item>@font/ubuntu_light</item>

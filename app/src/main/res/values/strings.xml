@@ -31,4 +31,8 @@
     <string name="_0">(0)</string>
     <string name="product">Product</string>
     <string name="price">Price</string>
+    <string name="price_0">₴0.00</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="_0g">0g</string>
+    <string name="details">Details</string>
 </resources>
