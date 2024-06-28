@@ -1,18 +1,17 @@
-package com.pizzaapp.fragments.products;
+package com.pizzaapp;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.activity.OnBackPressedCallback;
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,44 +19,39 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.pizzaapp.R;
 import com.pizzaapp.categories.Category;
-import com.pizzaapp.databinding.FragmentProductBinding;
-import com.pizzaapp.products.ProportionAdapter;
-import com.pizzaapp.utils.imageSlider.ImageSliderAdapter;
+import com.pizzaapp.databinding.ActivityProductBinding;
 import com.pizzaapp.products.Product;
+import com.pizzaapp.products.ProportionAdapter;
 import com.pizzaapp.utils.Format;
+import com.pizzaapp.utils.imageSlider.ImageSliderAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ProductFragment extends Fragment implements ProportionAdapter.OnProportionClickListener {
-    private FragmentProductBinding binding;
+public class ProductActivity extends AppCompatActivity implements ProportionAdapter.OnProportionClickListener {
+
+    private ActivityProductBinding binding;
 
     private Product product;
     private Category category;
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentProductBinding.inflate(inflater, container, false);
-
-        binding.backBtn.setOnClickListener(v -> requireActivity().getOnBackPressedDispatcher().onBackPressed());
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                requireActivity().getSupportFragmentManager().popBackStack();
-            }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityProductBinding.inflate(getLayoutInflater());
+        EdgeToEdge.enable(this);
+        setContentView(binding.getRoot());
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
         });
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            String productId = bundle.getString("productId");
-            getProductInfo(productId);
-        }
+        binding.backBtn.setOnClickListener(v -> finish());
 
-        return binding.getRoot();
+        String productId = getIntent().getStringExtra("productId");
+        getProductInfo(productId);
     }
 
     private void getProductInfo(String productId) {
@@ -99,8 +93,8 @@ public class ProductFragment extends Fragment implements ProportionAdapter.OnPro
 
                     product = new Product(id, name, prices, weights, images, details);
 
-                    binding.proportionsRv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-                    binding.proportionsRv.setAdapter(new ProportionAdapter(proportions, ProductFragment.this));
+                    binding.proportionsRv.setLayoutManager(new LinearLayoutManager(ProductActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                    binding.proportionsRv.setAdapter(new ProportionAdapter(proportions, ProductActivity.this));
 
                     categoryRef.child(categoryId).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -160,12 +154,9 @@ public class ProductFragment extends Fragment implements ProportionAdapter.OnPro
                 View child = binding.proportionsRv.getChildAt(i);
                 if (child instanceof Button) {
                     Button button = (Button) child;
-                    Context context = getContext();
-                    if (context != null){
-                        int colorGray = ContextCompat.getColor(context, R.color.gray);
-                        int colorPurple = ContextCompat.getColor(context, R.color.purpleLight);
-                        button.setBackgroundColor(button == clickedButton ? colorPurple : colorGray);
-                    }
+                    int colorGray = ContextCompat.getColor(ProductActivity.this, R.color.gray);
+                    int colorPurple = ContextCompat.getColor(ProductActivity.this, R.color.purpleLight);
+                    button.setBackgroundColor(button == clickedButton ? colorPurple : colorGray);
                 }
             }
 

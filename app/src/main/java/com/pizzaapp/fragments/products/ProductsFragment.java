@@ -1,5 +1,6 @@
 package com.pizzaapp.fragments.products;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pizzaapp.ProductActivity;
 import com.pizzaapp.R;
 import com.pizzaapp.databinding.FragmentProductsBinding;
 import com.pizzaapp.products.ProductListItem;
@@ -114,16 +116,8 @@ public class ProductsFragment extends Fragment implements ProductsAdapter.OnProd
 
     @Override
     public void onProductClick(String productId) {
-        Bundle bundle = new Bundle();
-        bundle.putString("productId", productId);
-
-        Fragment fragment = new ProductFragment();
-        fragment.setArguments(bundle);
-
-        getParentFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
+        Intent intent = new Intent(requireActivity(), ProductActivity.class);
+        intent.putExtra("productId", productId);
+        startActivity(intent);
     }
 }
