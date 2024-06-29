@@ -47,17 +47,12 @@ public class ProportionAdapter extends RecyclerView.Adapter<ProportionViewHolder
                 holder.getProportion_btn().setBackgroundColor(position == selectedPosition ? colorPurple : colorGray);
             }
 
+            holder.getProportion_btn().setText(proportion);
+
             holder.getProportion_btn().setOnClickListener(v -> {
                 selectedPosition = holder.getAdapterPosition();
                 notifyDataSetChanged();
                 listener.onProportionClick(v, position);
-            });
-
-            holder.getProportion_btn().setText(proportion);
-            holder.getProportion_btn().setOnClickListener(v -> {
-                if (listener != null) {
-                    listener.onProportionClick(v, position);
-                }
             });
         }
     }

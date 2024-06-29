@@ -35,4 +35,10 @@
     <string name="add_to_cart">Add to cart</string>
     <string name="_0g">0g</string>
     <string name="details">Details</string>
+    <string name="search">Search</string>
+    <string name="basket">Basket</string>
+    <string name="go_to_checkout">Go to Checkout</string>
+    <string name="plus">plus</string>
+    <string name="_1">1</string>
+    <string name="minus">minus</string>
 </resources>

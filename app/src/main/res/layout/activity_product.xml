@@ -30,6 +30,17 @@
             android:contentDescription="@string/back_button"
             android:backgroundTint="@android:color/transparent"/>
 
+        <ImageButton
+            android:id="@+id/addToCart_btn"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/heart"
+            android:contentDescription="@string/add_to_cart"
+            android:backgroundTint="@android:color/transparent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -138,16 +149,5 @@
             app:layout_constraintTop_toBottomOf="@id/detailsLabel_tv"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/addToCart_btn"
-        android:backgroundTint="@color/blue"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_margin="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="@string/add_to_cart"
-        android:fontFamily="@font/raleway_bold"
-        android:textSize="20sp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

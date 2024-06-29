@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/categories"
-        android:icon="@drawable/baseline_view_headline_24"
-        android:title="@string/categories"/>
-    <item
         android:id="@+id/home"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/home"
         android:title="@string/home"/>
     <item
+        android:id="@+id/search"
+        android:icon="@drawable/search"
+        android:title="@string/search"/>
+    <item
+        android:id="@+id/basket"
+        android:icon="@drawable/shopping_cart"
+        android:title="@string/basket"/>
+    <item
+        android:id="@+id/categories"
+        android:icon="@drawable/heart"
+        android:title="@string/categories"/>
+    <item
         android:id="@+id/profile"
-        android:icon="@drawable/baseline_person_24"
+        android:icon="@drawable/user"
         android:title="@string/me"/>
 </menu>

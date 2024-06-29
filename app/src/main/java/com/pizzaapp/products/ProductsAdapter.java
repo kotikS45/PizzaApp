@@ -40,6 +40,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductViewHolder> {
             holder.getName_tv().setText(product.getName());
             holder.getPrice_tv().setText(formatCurrency(product.getPrice()));
 
+            holder.itemView.setOnClickListener(v -> {
+                if (onProductClickListener != null) {
+                    onProductClickListener.onProductClick(items.get(position).getId());
+                }
+            });
+
             if (!product.getImage().isEmpty()) {
 
                 Picasso.get()
@@ -48,12 +54,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductViewHolder> {
                         .placeholder(R.drawable.placeholder_image)
                         .error(R.drawable.error_image)
                         .into(holder.getImage_iv());
-
-                holder.itemView.setOnClickListener(v -> {
-                    if (onProductClickListener != null) {
-                        onProductClickListener.onProductClick(items.get(position).getId());
-                    }
-                });
             } else {
                 holder.getImage_iv().setImageResource(R.drawable.error_image);
             }

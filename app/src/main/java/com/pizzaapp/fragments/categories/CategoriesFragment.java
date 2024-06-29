@@ -37,7 +37,7 @@ public class CategoriesFragment extends Fragment implements CategoriesAdapter.On
         return binding.getRoot();
     }
 
-    public void getCategoriesList() {
+    private void getCategoriesList() {
 
         ArrayList<Category> categories = new ArrayList<>();
         FirebaseDatabase.getInstance().getReference().child("Categories").addListenerForSingleValueEvent(new ValueEventListener() {

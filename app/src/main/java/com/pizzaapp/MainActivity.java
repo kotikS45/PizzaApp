@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.pizzaapp.fragments.basket.BasketFragment;
 import com.pizzaapp.fragments.categories.CategoriesFragment;
 import com.pizzaapp.fragments.home.HomeFragment;
 import com.pizzaapp.fragments.profile.ProfileFragment;
@@ -64,8 +65,9 @@ public class MainActivity extends AppCompatActivity {
     private HashMap<Integer, Fragment> getFragmentsMap() {
         HashMap<Integer, Fragment> fragments = new HashMap<>();
 
-        fragments.put(R.id.categories, new CategoriesFragment());
         fragments.put(R.id.home, new HomeFragment());
+        fragments.put(R.id.basket, new BasketFragment());
+        fragments.put(R.id.categories, new CategoriesFragment());
         fragments.put(R.id.profile, new ProfileFragment());
 
         return fragments;

@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,7 @@ import com.pizzaapp.utils.Format;
 import com.pizzaapp.utils.imageSlider.ImageSliderAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,7 +37,12 @@ public class ProductActivity extends AppCompatActivity implements ProportionAdap
     private ActivityProductBinding binding;
 
     private Product product;
+    private List<String> proportions = new ArrayList<>();
+    private int selectedProportion = 0;
     private Category category;
+    private boolean alreadyInBasket = false;
+    private ProportionAdapter proportionsAdapter;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +56,81 @@ public class ProductActivity extends AppCompatActivity implements ProportionAdap
         });
 
         binding.backBtn.setOnClickListener(v -> finish());
+        binding.addToCartBtn.setOnClickListener(this::onAddToCartListener);
 
         String productId = getIntent().getStringExtra("productId");
         getProductInfo(productId);
+        checkInBasket(0);
+    }
+
+    private void checkInBasket(int indexProportion) {
+        binding.addToCartBtn.setImageResource(R.drawable.heart_filled);
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        FirebaseDatabase.getInstance().getReference().child("Baskets").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                alreadyInBasket = false;
+                for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                    String productId = Objects.requireNonNull(childSnapshot.child("productId").getValue()).toString();
+
+                    if (proportions.isEmpty()) {
+                        if (productId.equals(product.getId())) {
+                            alreadyInBasket = true;
+                            return;
+                        }
+                    }
+                    else {
+                        int proportion;
+                        Object proportionObj = childSnapshot.child("proportion").getValue();
+                        if (proportionObj != null){
+                            proportion = Integer.parseInt(proportionObj.toString());
+                            if (productId.equals(product.getId()) && proportion == indexProportion) {
+                                alreadyInBasket = true;
+                                return;
+                            }
+                        }
+                    }
+                }
+                binding.addToCartBtn.setImageResource(R.drawable.heart);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void onAddToCartListener(View v) {
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        DatabaseReference basketRef = FirebaseDatabase.getInstance().getReference().child("Baskets").child(uid);
+        String itemId = product.getId();
+
+        if (!proportions.isEmpty()) {
+            itemId += "_" + selectedProportion;
+        }
+
+        if (alreadyInBasket) {
+            basketRef.child(itemId).removeValue().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    alreadyInBasket = false;
+                }
+                binding.addToCartBtn.setImageResource(R.drawable.heart);
+            });
+        } else {
+            HashMap<String, Object> basketItem = new HashMap<>();
+            basketItem.put("productId", product.getId());
+            basketItem.put("count", 1);
+            if (!proportions.isEmpty()) {
+                basketItem.put("proportion", selectedProportion);
+            }
+            basketRef.child(itemId).setValue(basketItem).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    alreadyInBasket = true;
+                }
+                binding.addToCartBtn.setImageResource(R.drawable.heart_filled);
+            });
+        }
     }
 
     private void getProductInfo(String productId) {
@@ -85,7 +164,7 @@ public class ProductActivity extends AppCompatActivity implements ProportionAdap
                         images.add(image);
                     }
 
-                    List<String> proportions = new ArrayList<>();
+                    proportions = new ArrayList<>();
                     for (DataSnapshot proportionSnapshot : productSnapshot.child("proportion").getChildren()) {
                         String proportion = Objects.requireNonNull(proportionSnapshot.getValue()).toString();
                         proportions.add(proportion);
@@ -94,7 +173,8 @@ public class ProductActivity extends AppCompatActivity implements ProportionAdap
                     product = new Product(id, name, prices, weights, images, details);
 
                     binding.proportionsRv.setLayoutManager(new LinearLayoutManager(ProductActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                    binding.proportionsRv.setAdapter(new ProportionAdapter(proportions, ProductActivity.this));
+                    proportionsAdapter = new ProportionAdapter(proportions, ProductActivity.this);
+                    binding.proportionsRv.setAdapter(proportionsAdapter);
 
                     categoryRef.child(categoryId).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -147,6 +227,8 @@ public class ProductActivity extends AppCompatActivity implements ProportionAdap
     @SuppressLint("ResourceAsColor")
     @Override
     public void onProportionClick(View v, int position) {
+        selectedProportion = position;
+        checkInBasket(position);
         if (v instanceof Button) {
             Button clickedButton = (Button) v;
 
