@@ -37,7 +37,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:itemCount="0"/>
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/go_to_checkout_btn"
         android:layout_width="match_parent"

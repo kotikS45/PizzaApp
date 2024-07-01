@@ -41,4 +41,13 @@
     <string name="plus">plus</string>
     <string name="_1">1</string>
     <string name="minus">minus</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="back_to_menu">Back to menu to grab something else?</string>
+    <string name="promo_code">Promo Code</string>
+    <string name="delivery_address">Delivery address</string>
+    <string name="rider_notes">Rider Notes</string>
+    <string name="e_g_please_don_t_ring_the_bell">E.g. Please don\'t ring the bell</string>
+    <string name="total">Total</string>
+    <string name="basket_total">Basket Total</string>
+    <string name="delivery_fee">Delivery Fee</string>
 </resources>

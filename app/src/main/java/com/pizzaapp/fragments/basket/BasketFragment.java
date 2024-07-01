@@ -1,6 +1,7 @@
 package com.pizzaapp.fragments.basket;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pizzaapp.BasketCheckoutActivity;
 import com.pizzaapp.basket.BasketItem;
 import com.pizzaapp.basket.BasketItemsAdapter;
 import com.pizzaapp.databinding.FragmentBasketBinding;
@@ -33,11 +35,22 @@ public class BasketFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentBasketBinding.inflate(inflater, container, false);
-        items = new ArrayList<>();
 
-        getBasketItems(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+        binding.goToCheckoutBtn.setOnClickListener(this::onGoToCheckoutClick);
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getBasketItems(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+    }
+
+    private void onGoToCheckoutClick(View v) {
+        Intent intent = new Intent(requireActivity(), BasketCheckoutActivity.class);
+        intent.putParcelableArrayListExtra("basketItems", items);
+        startActivity(intent);
     }
 
     private void setData() {
@@ -48,6 +61,7 @@ public class BasketFragment extends Fragment {
     }
 
     private void getBasketItems(String userId) {
+        items = new ArrayList<>();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Baskets").child(userId);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

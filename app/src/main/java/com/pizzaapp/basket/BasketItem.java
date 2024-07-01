@@ -1,6 +1,9 @@
 package com.pizzaapp.basket;
 
-public class BasketItem {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class BasketItem implements Parcelable {
     private String id;
     private String productId;
     private String image;
@@ -21,12 +24,58 @@ public class BasketItem {
         this.count = count;
     }
 
+    protected BasketItem(Parcel in) {
+        id = in.readString();
+        productId = in.readString();
+        image = in.readString();
+        name = in.readString();
+        proportion = in.readString();
+        price = in.readDouble();
+        count = in.readInt();
+    }
+
+    public static final Creator<BasketItem> CREATOR = new Creator<BasketItem>() {
+        @Override
+        public BasketItem createFromParcel(Parcel in) {
+            return new BasketItem(in);
+        }
+
+        @Override
+        public BasketItem[] newArray(int size) {
+            return new BasketItem[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(productId);
+        dest.writeString(image);
+        dest.writeString(name);
+        dest.writeString(proportion);
+        dest.writeDouble(price);
+        dest.writeInt(count);
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getImage() {
@@ -63,13 +112,5 @@ public class BasketItem {
 
     public void setCount(int count) {
         this.count = count;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
     }
 }

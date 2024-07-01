@@ -44,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(binding.fragmentContainer.getId(), new HomeFragment())
                 .commit();
-        binding.bottomNavigation.setSelectedItemId(R.id.home);
 
+        int menuItem = getIntent().getIntExtra("page", R.id.home);
         binding.bottomNavigation.setOnItemSelectedListener(this::onMenuItemSelectedListener);
+        binding.bottomNavigation.setSelectedItemId(menuItem);
     }
 
     @Override
