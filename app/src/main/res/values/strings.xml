@@ -50,4 +50,9 @@
     <string name="total">Total</string>
     <string name="basket_total">Basket Total</string>
     <string name="delivery_fee">Delivery Fee</string>
+    <string name="filter">filter</string>
+    <string name="search_product">Search Product</string>
+    <string name="find_your_suitable_product_now">Find your suitable product now.</string>
+    <string name="filters">Filters</string>
+    <string name="ok">Ok</string>
 </resources>

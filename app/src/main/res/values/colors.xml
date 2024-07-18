@@ -16,4 +16,5 @@
     <color name="textPurple">#2D0C57</color>
     <color name="textDetails">#9095A6</color>
     <color name="zappBlue">#54B7F9</color>
+    <color name="searchText">#1B153D</color>
 </resources>
